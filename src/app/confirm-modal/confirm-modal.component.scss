@@ -1,0 +1,19 @@
+ion-toolbar {
+
+    padding: 0;
+    margin: 0;
+
+    ion-button{
+        margin: 0;
+    }
+}
+
+ion-title {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+}
+
+ion-label {
+    white-space: normal !important;
+    text-align: center;
+}

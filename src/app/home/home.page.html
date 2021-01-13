@@ -1,0 +1,97 @@
+<ion-content color="dark" [fullscreen]="true" id="body" scrollY="false">
+  <ion-toolbar style="--background: transparent;">
+    <ion-label style="text-align: left; margin-left: 10px; color: white"><strong>LA SOIREE CONTINUE</strong></ion-label>
+    <ion-button slot="end" fill="clear" (click)="openCart()">
+      <ion-icon name="cart"></ion-icon>
+      <ion-badge color="primary" *ngIf="cart.length != 0"> {{ getQuantiteCart() }} </ion-badge>
+    </ion-button>
+    <ion-button slot="end" fill="clear" (click)="goToProfil()">
+      <ion-icon size="large" name="person-circle"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+
+  <ion-toolbar style="--background: transparant; position: absolute;">
+    <ion-button slot="end" color="light" fill="clear" (click)="goToAbout()">
+      <ion-icon size="large" name="information-circle"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+
+  <div id="content" (scroll)="onScrolling($event)">
+    <div class="title on-top" id="produits-top" mode="ios">
+      <ion-button fill="clear" color="dark" (click)="scrollToProduits()">
+        <ion-label><strong>Produits</strong></ion-label>
+      </ion-button>
+      <ion-button fill="clear" color="dark" (click)="scrollToFormule()">
+        <ion-label><strong>Formules</strong></ion-label>
+      </ion-button>
+      <span id="selected-span"></span>
+    </div>
+    <div id="swipe-content">
+      <div  id="produits">
+        <div class="title" mode="ios">
+          <ion-button fill="clear" color="dark" (click)="scrollToProduits()">
+            <ion-label><strong>Produits</strong></ion-label>
+          </ion-button>
+          <ion-button fill="clear" color="dark" (click)="scrollToFormule()">
+            <ion-label><strong>Formules</strong></ion-label>
+          </ion-button>
+          <span></span>
+        </div>
+        <div class="title padding">
+          <div>Produits</div>
+        </div>
+
+        <div class="spinner" *ngIf="ProduitsDidLoad">
+          <ion-spinner name="crescent"></ion-spinner>
+       </div>
+
+        <div class="items">
+          <ion-card *ngFor="let produit of produits" button style="padding: 10px;" >
+            <div (click)="goTo(produit)">
+              <div style="border-radius: 10px; overflow: hidden;">
+                <img style="height: 100px;" src="{{ produit.img }}">
+              </div>
+              <br>
+              <ion-label> {{ produit.price.toFixed(2) }}€ </ion-label>
+              <br>
+              <ion-label><strong> {{ produit.title }} </strong></ion-label>
+            </div>
+            <ion-button color="dark" expand="block" (click)="addToCard(produit, 1)">
+              <ion-label><strong>Choisir</strong></ion-label>
+            </ion-button>
+          </ion-card>
+        </div>
+      </div>
+
+          <!-- <ion-header class="ion-no-border" style="position: fixed;" [translucent]="true">
+            <ion-toolbar style="padding-top: 30px;">
+              <ion-title>Formules</ion-title>
+            </ion-toolbar>
+          </ion-header> -->
+      <br><br>
+
+      <div class="title padding" id="formules">
+        Formules
+      </div>
+
+      <div class="spinner" *ngIf="formulesDidLoad">
+        <ion-spinner name="crescent"></ion-spinner>
+     </div>
+
+      <div class="items">
+        <ion-card *ngFor="let formule of formules" button style="padding: 10px;" (click)="addToCard(formule, 1)">
+        <div style="border-radius: 10px; overflow: hidden;">
+          <img style="width: 100%;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPcAAADMCAMAAACY78UPAAAAMFBMVEW8vsDn6Onq6+y5u73CxMbIycvh4uPW2NnR09Tc3d/AwsTk5ebU1dfg4eK9v8HOz9HoolfoAAADEUlEQVR4nO3c63KqMBRAYZINVUTw/d/2yNVEg4JHkZ2s709nOuKwhhSDhGYZAAAAAAAAAAAAAAAAACROpCkKkV/vxtbkUtmrukirvKmt6dhzSuHyZ0YphcvZmlt48evd2YwY1yGZA15YLzyZ7qPXbfNf789W7rpPv96fraQ6zptEz2upfo5lUiU3b+krk5unytA5XJeUw3XJ6Rh3vpT2MoRLVhTD0c+kHn8dp2v29Tz2UNid5/J4w9ts8xjen95ttOF99sMnlxyGX0caPmXfT1Skjjl8OqyP87OYw+Uym92Gm0jDp+zwPGX8JiK28BfZt0uVuMLl+CLbDd9yx77rmt17NhlvTP8aE1F4M/xcMoab5vVrAGArxTft9zwvlf2i/X7v6tzm/AK694Zuuummm+74uj81W1HWfc4/pFbVbT91n09KuuneGbrvu6Xzzluq7m7OdVWZwxv3BDR3S2GG2wbrFzVo7s6nycf6cM3d5mb1XSDF3Rd3Vebandfb7ex5K53uys0OLz6eL4ql2wTv+s3fJ1Xc7Y3zKrTKo5xfm6u32zuvhb78b9dCVLNvqbfbG+iBYX6yM6t9uo31dr+Yt/QbzY10zd2SV125NaHscQ1+uEpzd/snXBpbHkPbjINh5spVd/dwIRraZPrjD09htXfPbeF8yIU+4qLqdk717hNVwVVeEXVLNY3o5uWDgxF1/01L86Q2nsBIj6a7X47dhYv/vGRwpMfSPa5Cb8Pzu+zQSI+kW6bJen73FPjMSI+j2zl/V+ORfz7S4+h2R7Z/WT430qPoPgVTfX93Nxxi6F6Q/TCz19+9cDWE/w2c/u7Fi0C8ka6+O3j6Dh9w79pdeffybH+kK++WYnm2N9J1d6/LnvkWWmH3kg9uL3wa6aq712Y7I11zt4SnpE8P+Li94u63Vm+O83S93VK+tT6zlmFrrd3jYqa1hm0Vd//XW9JN997QnWq3+Vi3rnX3yT5n8QV07w3ddNNNN92RdCf6fy2yTz0UGpTMv80GAAAAAAAAAAAAAAAAAAAAAAAAAAAAkKZ/TikowOqV20oAAAAASUVORK5CYII=">
+        </div>
+        <br>
+        <ion-label> {{ formule.price.toFixed(2) }}€ </ion-label>
+          <br>
+          <ion-label><strong> {{ formule.title }} </strong></ion-label>
+          <ion-button expand="block" color="dark">
+            <ion-label><strong>Choisir</strong></ion-label>
+          </ion-button>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

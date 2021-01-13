@@ -1,0 +1,47 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-button fill="clear" slot="start" (click)="close()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title>
+      Connexion
+    </ion-title>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-list mode="ios" lines="none">
+  <ion-item>
+    <ion-title>EMAIL</ion-title>
+  </ion-item>
+  <ion-item>
+    <div class="input">
+      <ion-input type="email" (ionChange)="disabledError('mail')" [(ngModel)]="dataUser.email" ></ion-input>
+      <span id="mail"></span>
+      <span class="focus"></span>
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-title>MOT DE PASSE</ion-title>
+  </ion-item>
+  <ion-item>
+    <div class="input">
+      <ion-input type="password" (ionChange)="disabledError('password')" [(ngModel)]="dataUser.password" ></ion-input>
+      <span id="password"></span>
+      <span class="focus"></span>
+    </div>
+  </ion-item>
+  <ion-item>
+    <p>T'as pas de compte ? Bah vas-y, <a (click)="openSignUp()">inscris-toi !</a></p>
+  </ion-item>
+</ion-list>
+
+<div id="error">
+  <ion-label *ngIf="errorMessage != ''" color="danger"> {{ errorMessage }} </ion-label>
+  <ion-label *ngIf="forgotLink" color="danger"> <a (click)="openConfirmModal()"> Tu l'as oublié ? Clique ici ! </a> </ion-label>
+  <ion-spinner *ngIf="isConnecting" color="dark" name="crescent"></ion-spinner>
+</div>
+
+
+<ion-footer>
+  <ion-button (click)="login()" expand="full" color="dark">Connexion</ion-button>
+</ion-footer>

@@ -1,0 +1,14 @@
+<ion-toolbar>
+  <ion-title>Erreur</ion-title>
+  <ion-button slot="end" fill="clear" color="dark" (click)="close()">
+    <ion-icon name="close"></ion-icon>
+  </ion-button>
+</ion-toolbar>
+
+<div>
+  <ion-label color="dark">{{ content }}</ion-label>
+</div>
+
+<ion-button expand="full" id="ok-button" color="dark" (click)="close()">
+  OK
+</ion-button>

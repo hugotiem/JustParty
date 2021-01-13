@@ -1,0 +1,9 @@
+.items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: scroll;
+}
+
+#add-button {
+    margin: 0 -2px;
+}

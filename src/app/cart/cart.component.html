@@ -1,0 +1,135 @@
+<div id="content">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-button slot="start" fill="clear" (click)="close()">
+        <ion-icon color="dark" size="large" name="close"></ion-icon>
+      </ion-button>
+      <ion-title>
+        Ton panier
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <br><br><br>
+
+  <div id="card-title">
+    <ion-label style="font-size: 25pt;">Détail de la commande</ion-label>
+  </div>
+
+  <span class="bar"></span>
+
+  <div *ngIf="!empty">
+
+    <ion-grid id="adress">
+      <ion-row>
+        <ion-col size="4">
+          <ion-label color="dark"><strong> Ton adresse de livraison : </strong></ion-label>
+        </ion-col>
+        <ion-col size="8">
+          <ion-label color="dark"> {{ userAdress }} <a style="opacity: 0.6; font-size: small; padding-left: 10px;" (click)="updateValue()">Changer d'adresse.</a> </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <span class="bar"></span>
+
+    <ion-list id="list-order" lines="full">
+      <ion-list-header mode="ios">
+        <ion-label>Ta commande  :</ion-label>
+      </ion-list-header>
+      <br>
+      <ion-item-sliding *ngFor="let item of cart.getCart()">
+        <ion-item (click)="openItemModal(item)" button detail="false">
+          <ion-grid>
+            <ion-row mode="md">
+              <ion-col size="1.5">
+                <ion-badge style="--padding-start: 6px; --padding-end: 6px" color="dark">
+                  <ion-label> {{ item.quantite }} </ion-label>
+                </ion-badge>
+              </ion-col>
+              <ion-col size="8">
+                <ion-label><strong> {{ item.item.title }} </strong></ion-label>
+                <ion-note *ngIf="item.item.formuleContent != undefined"> {{ getString(item.item.formuleContent) }} </ion-note>
+              </ion-col>
+              <ion-col size ="2.5">
+                <ion-label style="text-align: end;"> €{{ item.item.price.toFixed(2) }} </ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" expandable (click)="delete(item)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+      <ion-item>
+        <ion-chip style="margin: 10px 0;" (click)="openExtrasModal()">
+          <ion-icon name="add"></ion-icon> <ion-label>Extras</ion-label>
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+
+    <ion-list mode="md" lines="none">
+      <ion-item>
+        <ion-label>Sous-total</ion-label>
+        <ion-label style="text-align: end;" slot="end">€{{ subTotal.toFixed(2) }} </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label style="opacity: 0.5;">Réduction</ion-label>
+        <ion-label slot="end" style="text-align: end; opacity: 0.5;">- €0.00</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label style="opacity: 0.5;">Livraison</ion-label>
+        <ion-label style="text-align: end; opacity: 0.5;" slot="end">€0.00</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><strong>Total</strong></ion-label>
+        <ion-label slot="end" style="text-align: end;">€ {{ subTotal.toFixed(2) }} </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <div style="margin: 20px; font-size: small; text-align: justify;">
+      <ion-label color="dark"><strong>* Fais bien attention d'entrer une adresse de livraison valide, sinon on refusera la commande.</strong></ion-label>
+    </div>
+
+    <div style="height: 80px">
+
+    </div>
+
+  </div>
+
+  <!-- SI CART VIDE -->
+
+  <div *ngIf="empty">
+    <ion-list lines="none" style="margin-top: 50px;">
+      <ion-item style="text-align: center; height: 35px;">
+        <ion-label>Ton panier est vide ... </ion-label>
+      </ion-item> 
+
+      <ion-item style="text-align: center; height: 30px;">
+        <ion-label>Vas vite le remplir !</ion-label>
+      </ion-item>
+
+      <ion-item style="text-align: center;">
+        <ion-label><ion-icon size="large" color="dark" name="arrow-back"></ion-icon></ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div style="position: absolute; bottom: 10%;">
+      <img width="80%" style="transform: translate(10%);" src="../../assets/img/empty-cart.png" alt="Empty cart">
+    </div>
+
+  </div>
+
+  <ion-button [disabled]="empty" color="dark" expand="full" class="jp-order-button" (click)="validateOrder()">
+    <ion-label>Valider la commande</ion-label>
+  </ion-button>
+
+</div>

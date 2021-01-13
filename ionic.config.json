@@ -1,0 +1,8 @@
+{
+  "name": "JustParty",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,20 @@
+<ion-toolbar>
+  <ion-title>Authentification</ion-title>
+  <ion-button slot="end" fill="clear" color="dark" (click)="close()">
+    <ion-icon name="close"></ion-icon>
+  </ion-button>
+</ion-toolbar>
+
+<ion-label color="dark">Entrer le mot de passe pour <strong> {{ email }} </strong> </ion-label>
+
+<ion-item lines="none">
+  <div>
+    <ion-input [(ngModel)]="password" type="password" autofocus="true"></ion-input>
+    <span id="new-password"></span>
+    <span class="focus"></span>
+  </div>
+</ion-item>
+
+<ion-button color="dark" expand="full" (click)="close()">
+  OK
+</ion-button>

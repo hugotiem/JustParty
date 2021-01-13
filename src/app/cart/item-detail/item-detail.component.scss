@@ -1,0 +1,16 @@
+#add-remove {
+    width: 100%;
+    font-size: 30pt;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+
+    ion-label {
+        padding-top: 20px;
+    }
+}
+
+ion-toolbar {
+    position: fixed;
+    --background: transparent;
+}

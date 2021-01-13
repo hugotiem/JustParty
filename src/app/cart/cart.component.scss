@@ -1,0 +1,45 @@
+#content {
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+
+    position: relative;
+
+    ion-header {
+        position: fixed;
+    }
+
+    ion-item-sliding ion-item {
+        --padding-start: 0;
+        width: 100%;
+
+        ion-label {
+            white-space: normal;
+        }
+    }
+
+    #list-order{
+        width: 100%;
+    }
+}
+
+#card-title {
+    text-align: center; 
+    padding: 20px; 
+    color: black;
+}
+
+.bar {
+    position: absolute;
+    left: 50%;
+    height: 1px;
+    width: 60px;
+    overflow: hidden;
+    transform: translate(-50%);
+    z-index: 1000;
+    background: black;
+}
+
+#adress {
+    margin: 30px 5px;
+}

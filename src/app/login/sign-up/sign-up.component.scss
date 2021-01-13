@@ -1,0 +1,49 @@
+ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+
+    .input {
+        margin: 0 30px;
+        width: 100%;
+    }
+
+    span {
+        position: absolute;
+        height: 1px;
+        width: 90%;
+        left: 5%;
+        background-color: black;
+        opacity: 0.2;
+    }
+
+    .focus {
+        width: 0;
+        left: 50%;
+        opacity: 1;
+
+        transition-property: width, left;
+        transition-duration: .2s;
+    }
+
+    p {
+        text-align: center;
+        margin: 40px;
+    }
+}
+
+.item-has-focus{
+    .focus{
+        width: 90%;
+        left: 5%;
+    }
+}
+
+#error {
+    margin: 0 30px;
+    text-align: center;
+}
+
+.invalid-input {
+    background-color: red !important;
+    opacity: 1 !important;
+}

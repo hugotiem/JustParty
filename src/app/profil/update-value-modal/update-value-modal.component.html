@@ -1,0 +1,22 @@
+<ion-toolbar>
+  <ion-title>Modifier</ion-title>
+  <ion-button slot="end" fill="clear" color="dark" (click)="close(false, true)">
+    <ion-icon name="close"></ion-icon>
+  </ion-button>
+</ion-toolbar>
+
+<div id="content">
+  <ion-label color="dark"> {{ content }} </ion-label>
+</div>
+
+<ion-item lines="none">
+  <div>
+    <ion-input [(ngModel)]="value" [type]="type" autofocus="true"></ion-input>
+    <span id="new-value"></span>
+    <span class="focus"></span>
+  </div>
+</ion-item>
+
+<ion-button color="dark" expand="full" (click)="close(true, false)">
+  Modifier
+</ion-button>

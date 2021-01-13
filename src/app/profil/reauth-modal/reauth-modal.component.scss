@@ -1,0 +1,42 @@
+ion-toolbar {
+
+    padding: 0;
+    margin: 0;
+}
+
+ion-button{
+    margin: 0;
+}
+
+ion-label {
+    text-align: center;
+}
+
+ion-item {
+    --padding-start: 10%;
+    --padding-end: 10%;
+
+    span {
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        background-color: black;
+        opacity: 0.2;
+    }
+
+    .focus {
+        width: 0;
+        left: 50%;
+        opacity: 1;
+
+        transition-property: width, left;
+        transition-duration: .2s;
+    }
+}
+
+.item-has-focus{
+    .focus{
+        width: 100%;
+        left: 0;
+    }
+}
